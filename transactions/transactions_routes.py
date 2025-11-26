@@ -4,7 +4,7 @@ from models.models import Transaction, User
 from schemas.schemas import TransactionSchema, ResponseTransactionSchema
 from typing import List
 
-transaction_router = APIRouter(prefix='/transactions', tags=['transactions']) # dependencies=[Depends(verify_token)]
+transaction_router = APIRouter(prefix='/transactions', tags=['Transactions']) # dependencies=[Depends(verify_token)]
 
 
 @transaction_router.get('/')

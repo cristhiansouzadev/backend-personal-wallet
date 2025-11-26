@@ -19,6 +19,8 @@ oauth2_schema = OAuth2PasswordBearer(tokenUrl='auth/login')
 
 from auth.auth_routes import auth_router
 from transactions.transactions_routes import transaction_router
+from categories.categories_routes import category_router
 
 app.include_router(auth_router)
 app.include_router(transaction_router)
+app.include_router(category_router)

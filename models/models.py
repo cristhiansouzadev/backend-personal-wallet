@@ -1,7 +1,7 @@
-from sqlalchemy import create_engine, Column, String, Integer, Boolean, Float, ForeignKey
+from sqlalchemy import create_engine, Column, String, Integer, Boolean, Float, ForeignKey, DateTime
+from sqlalchemy.sql import func
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy_utils.types import ChoiceType
-from datetime import datetime
 
 db = create_engine("sqlite:///./database/database.db")
 Base = declarative_base()
@@ -26,12 +26,11 @@ class User(Base):
 class Transaction(Base):
     __tablename__ = 'transactions'
     id = Column('id', Integer, primary_key=True, autoincrement=True)
-    status = Column('status', String)
     user = Column('user', ForeignKey('users.id'))
     amount = Column('price', Float)
     type_flow = Column('type_flow', String)
-    category = Column('category', String)
-    #created_at = Column('created_at', default=datetime.utcnow)
+    category = Column('category', ForeignKey('categories.id'))
+    created_at = Column('created_at', DateTime, server_default=func.now())
 
     def __init__(self, user, type_flow, category, amount=0):
         self.user = user
@@ -40,4 +39,11 @@ class Transaction(Base):
         self.amount = amount
 
 
+class Category(Base):
+    __tablename__ = 'categories'
+    id = Column('id', Integer, primary_key=True, autoincrement=True)
+    name = Column('name', String)
+
+    def __init__(self, name):
+        self.name = name
 

@@ -6,7 +6,7 @@ from schemas.schemas import UserSchema, LoginSchema
 from jose import jwt, JWTError
 from datetime import datetime, timedelta, timezone
 
-auth_router = APIRouter(prefix='/auth', tags=['auth'])
+auth_router = APIRouter(prefix='/auth', tags=['Auth'])
 
 def get_token(user_id, duration_token=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)):
     date_expires = datetime.now(timezone.utc) + duration_token
